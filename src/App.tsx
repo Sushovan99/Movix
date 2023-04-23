@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-// import { fetchData } from "./utils/api";
 import { useGetMoviesQuery } from "./store/apiSlices/getMovieSlice";
 import "./App.scss";
 
