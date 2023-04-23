@@ -1,17 +1,23 @@
-import { ReactElement, useEffect, useState } from "react";
-import { fetchData } from "./utils/api";
+import { ReactElement } from "react";
+// import { fetchData } from "./utils/api";
+import { useGetMoviesQuery } from "./store/apiSlices/getMovieSlice";
 import "./App.scss";
 
 function App(): ReactElement {
-    const [movies, setMovies] = useState([]);
-    useEffect(() => {
-        const fetchLastestMovies = async () => {
-            const data = await fetchData("/movie/popular");
-            setMovies(data);
-            console.log("movies", data);
-        };
-        fetchLastestMovies();
-    }, []);
+    const {
+        isFetching,
+        isLoading,
+        isError,
+        data: movies,
+    } = useGetMoviesQuery();
+    if (isLoading && isFetching) {
+        return <h2>Loading...</h2>;
+    } else if (isError) {
+        return <h2>Error...</h2>;
+    }
+
+    console.log("movies", movies);
+
     return <code style={{ color: "white" }}>{JSON.stringify(movies)}</code>;
 }
 

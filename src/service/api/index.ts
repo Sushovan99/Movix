@@ -1,0 +1,13 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+const BASE_URL: string = import.meta.env["VITE_APP_TMDB_BASE_URL"];
+const TOKEN: string = import.meta.env["VITE_APP_TMDB_TOKEN"];
+const headers = {
+    Authorization: "bearer " + TOKEN,
+};
+
+export const movixApiSlice = createApi({
+    reducerPath: "movixApi",
+    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL, headers }),
+    endpoints: (builder) => ({}),
+});
