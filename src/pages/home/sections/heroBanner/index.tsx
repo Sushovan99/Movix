@@ -37,12 +37,12 @@ const HeroBanner: React.FunctionComponent = () => {
 
     return (
         <section className="hero-banner">
-            <div className="backdrop-img">
+            <div className="hero-banner__backdrop-img">
                 <Img
                     src={
                         randomMovie?.backdrop_path
                             ? base_url +
-                              backdrop_sizes[1280] +
+                              backdrop_sizes.original +
                               randomMovie.backdrop_path
                             : ""
                     }
@@ -55,8 +55,10 @@ const HeroBanner: React.FunctionComponent = () => {
             <ContentWrapper>
                 <div className="hero-banner__content">
                     <div className="hero-banner__greeting">
-                        <h1 className="greeting__title">Welcome.</h1>
-                        <span className="greeting__subtitle">
+                        <h1 className="hero-banner__greeting__title">
+                            Welcome.
+                        </h1>
+                        <span className="hero-banner__greeting__subtitle">
                             Thousands of movies, TV shows and people to
                             discover. Explore now.
                         </span>
