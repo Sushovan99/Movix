@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { movixApiSlice } from "../service/api";
+import imageDimnensionSlice from "./UI/imageDimnensionSlice";
 
 export const store = configureStore({
     reducer: {
         [movixApiSlice.reducerPath]: movixApiSlice.reducer,
+        dimensions: imageDimnensionSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(movixApiSlice.middleware),
