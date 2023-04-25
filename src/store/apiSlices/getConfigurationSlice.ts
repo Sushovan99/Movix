@@ -1,4 +1,4 @@
-import { movixApiSlice } from "../../service/api";
+import { movixApiSlice } from "@/service/api";
 
 interface Images {
     base_url: string;

@@ -4,7 +4,7 @@ interface Dimensions {
     base_url: string;
     backdrop_sizes: {
         300: string;
-        700: string;
+        780: string;
         1280: string;
         original: string;
     };
@@ -45,7 +45,7 @@ const initialState: Dimensions = {
     base_url: "https://image.tmdb.org/t/p/",
     backdrop_sizes: {
         "300": "w300",
-        "700": "w700",
+        "780": "w780",
         "1280": "w1280",
         original: "original",
     },

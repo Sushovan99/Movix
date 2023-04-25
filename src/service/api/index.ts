@@ -8,8 +8,9 @@ const headers = {
 
 export const movixApiSlice = createApi({
     reducerPath: "movixApi",
-    refetchOnFocus: true,
+    // refetchOnFocus: true,
     refetchOnReconnect: true,
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL, headers }),
+    tagTypes: ["upcoming", "popular"],
     endpoints: (builder) => ({}),
 });

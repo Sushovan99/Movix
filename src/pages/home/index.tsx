@@ -5,8 +5,8 @@ import HeroBanner from "./sections/heroBanner";
 const HomePage: React.FunctionComponent = () => {
     return (
         <div className="homePage">
-            HomePage
             <HeroBanner />
+            Home page
         </div>
     );
 };

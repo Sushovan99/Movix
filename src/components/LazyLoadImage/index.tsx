@@ -3,9 +3,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface Props {
-    alt: string;
+    alt?: string;
     src: string;
-    className: string;
+    className?: string;
 }
 
 const Img: React.FunctionComponent<Props> = ({
