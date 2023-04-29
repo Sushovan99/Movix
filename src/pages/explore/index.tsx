@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 
 const ExplorePage: React.FunctionComponent = () => {
-    return <div>ExplorePage</div>;
+    return <div style={{ minHeight: "100vh" }}>ExplorePage</div>;
 };
 
 export default ExplorePage;

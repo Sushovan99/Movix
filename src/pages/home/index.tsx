@@ -7,6 +7,7 @@ const HomePage: React.FunctionComponent = () => {
         <div className="homePage">
             <HeroBanner />
             Home page
+            <div style={{ height: "1000px" }}></div>
         </div>
     );
 };
