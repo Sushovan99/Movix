@@ -14,4 +14,5 @@ export interface Result {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    media_type: string;
 }

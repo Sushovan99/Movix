@@ -9,8 +9,10 @@ import Img from "../LazyLoadImage";
 import ContentWrapper from "../ContentWrapper";
 import { Result } from "@/service/models";
 import { useAppSelector } from "@/store/hooks";
-import "./style.scss";
 import CircleRating from "../CircleRating";
+import Genres from "../Genres";
+import PosterFallback from "@/assets/no-poster.png";
+import "./style.scss";
 
 interface Props {
     results: Result[] | undefined;
@@ -31,6 +33,7 @@ const Skeleton: React.FunctionComponent = () => {
 
 const Carousel: React.FunctionComponent<Props> = ({ results, isSuccess }) => {
     const carouselRef = useRef<HTMLDivElement>(null);
+    const Navigate = useNavigate();
     const { base_url, poster_sizes } = useAppSelector(
         (state) => state.dimensions
     );
@@ -71,12 +74,24 @@ const Carousel: React.FunctionComponent<Props> = ({ results, isSuccess }) => {
                             const url =
                                 base_url + poster_sizes[500] + item.poster_path;
                             return (
-                                <div className="carouselItem" key={item.id}>
+                                <div
+                                    className="carouselItem"
+                                    key={item.id}
+                                    onClick={() =>
+                                        Navigate(
+                                            `${item.media_type}/${item.id}`
+                                        )
+                                    }
+                                >
                                     <div className="posterBlock">
-                                        <Img src={url} alt={item.title} />
+                                        <Img
+                                            src={url ? url : PosterFallback}
+                                            alt={item.title}
+                                        />
                                         <CircleRating
                                             rating={item.vote_average}
                                         />
+                                        <Genres genreIDs={item.genre_ids} />
                                     </div>
                                     <div className="textBlock">
                                         <span className="title">

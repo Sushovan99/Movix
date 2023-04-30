@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style.scss";
 import { useGetUpcomingMoviesQuery } from "@/store/apiSlices/getUpcomingMovies";
 import { useAppSelector } from "@/store/hooks";
 import Img from "@/components/LazyLoadImage";
 import ContentWrapper from "@/components/ContentWrapper";
+import "./style.scss";
 
 const HeroBanner: React.FunctionComponent = () => {
     const { data: movies } = useGetUpcomingMoviesQuery();
