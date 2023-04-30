@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ContentWrapper from "@/components/ContentWrapper";
 import SwitchTabs from "@/components/SwitchTabs";
 import { useGetTopRatedMoviesQuery } from "@/store/apiSlices/getTopRatedMovies";
@@ -6,10 +6,15 @@ import Carousel from "@/components/Carousel";
 import "./style.scss";
 
 const TopRated: React.FunctionComponent = () => {
+    const carouselContainerRef = useRef<HTMLDivElement>(null);
     const [tabValue, setTabValue] = useState("movie");
 
     const onTabsChange = (tab: string) => {
         setTabValue(tab === "Movies" ? "movie" : "tv");
+        carouselContainerRef.current?.scrollTo({
+            left: 0,
+            behavior: "auto",
+        });
     };
 
     const { data: topRatedMovies, isSuccess } =
@@ -29,6 +34,7 @@ const TopRated: React.FunctionComponent = () => {
                 results={topRatedMovies?.results}
                 isSuccess={isSuccess}
                 tabValue={tabValue}
+                carouselRef={carouselContainerRef}
             />
         </div>
     );

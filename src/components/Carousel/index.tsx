@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
@@ -18,6 +18,7 @@ interface Props {
     results: Result[] | undefined;
     isSuccess: boolean;
     tabValue?: string;
+    carouselRef: React.RefObject<HTMLDivElement>;
 }
 
 const Skeleton: React.FunctionComponent = () => {
@@ -36,30 +37,32 @@ const Carousel: React.FunctionComponent<Props> = ({
     results,
     isSuccess,
     tabValue,
+    carouselRef,
 }) => {
-    const carouselRef = useRef<HTMLDivElement>(null);
     const Navigate = useNavigate();
     const { base_url, poster_sizes } = useAppSelector(
         (state) => state.dimensions
     );
 
     const scrollHandler = (direction: "left" | "right"): void => {
-        const container = carouselRef.current;
-        let scrollAmount = 0;
-        if (container) {
-            if (direction === "left") {
-                scrollAmount =
-                    container.scrollLeft - (container.offsetWidth + 20);
-            } else {
-                scrollAmount =
-                    container.scrollLeft + (container.offsetWidth + 20);
+        if (carouselRef) {
+            const container = carouselRef.current;
+            let scrollAmount = 0;
+            if (container) {
+                if (direction === "left") {
+                    scrollAmount =
+                        container.scrollLeft - (container.offsetWidth + 20);
+                } else {
+                    scrollAmount =
+                        container.scrollLeft + (container.offsetWidth + 20);
+                }
             }
-        }
 
-        container?.scrollTo({
-            left: scrollAmount,
-            behavior: "smooth",
-        });
+            container?.scrollTo({
+                left: scrollAmount,
+                behavior: "smooth",
+            });
+        }
     };
 
     return (
