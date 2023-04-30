@@ -9,11 +9,11 @@ interface Movie {
 
 export const extendedGetMovieSlice = movixApiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getMovies: builder.query<Movie, void>({
-            query: () => "/movie/popular",
+        getPopularMovies: builder.query<Movie, string>({
+            query: (mediaType: string) => `/${mediaType}/popular`,
             providesTags: ["popular"],
         }),
     }),
 });
 
-export const { useGetMoviesQuery } = extendedGetMovieSlice;
+export const { useGetPopularMoviesQuery } = extendedGetMovieSlice;

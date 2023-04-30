@@ -11,6 +11,6 @@ export const movixApiSlice = createApi({
     // refetchOnFocus: true,
     refetchOnReconnect: true,
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL, headers }),
-    tagTypes: ["upcoming", "popular", "trending"],
+    tagTypes: ["upcoming", "popular", "trending", "topRated"],
     endpoints: (builder) => ({}),
 });

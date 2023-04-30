@@ -17,6 +17,7 @@ import "./style.scss";
 interface Props {
     results: Result[] | undefined;
     isSuccess: boolean;
+    tabValue?: string;
 }
 
 const Skeleton: React.FunctionComponent = () => {
@@ -31,7 +32,11 @@ const Skeleton: React.FunctionComponent = () => {
     );
 };
 
-const Carousel: React.FunctionComponent<Props> = ({ results, isSuccess }) => {
+const Carousel: React.FunctionComponent<Props> = ({
+    results,
+    isSuccess,
+    tabValue,
+}) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const Navigate = useNavigate();
     const { base_url, poster_sizes } = useAppSelector(
@@ -79,7 +84,9 @@ const Carousel: React.FunctionComponent<Props> = ({ results, isSuccess }) => {
                                     key={item.id}
                                     onClick={() =>
                                         Navigate(
-                                            `${item.media_type}/${item.id}`
+                                            `${item.media_type || tabValue}/${
+                                                item.id
+                                            }`
                                         )
                                     }
                                 >
