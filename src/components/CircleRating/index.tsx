@@ -13,7 +13,7 @@ const CircleRating: React.FunctionComponent<Props> = ({ rating }) => {
             <CircularProgressbar
                 value={rating}
                 maxValue={10}
-                text={`${rating}`}
+                text={`${rating.toFixed(1)}`}
                 styles={buildStyles({
                     pathColor:
                         rating < 5 ? "red" : rating < 7 ? "orange" : "green",
