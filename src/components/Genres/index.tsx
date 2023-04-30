@@ -3,7 +3,7 @@ import { useAppSelector } from "@/store/hooks";
 import "./style.scss";
 
 interface Props {
-    genreIDs: number[];
+    genreIDs: number[] | undefined;
 }
 
 const Genres: React.FunctionComponent<Props> = ({ genreIDs }) => {
@@ -11,7 +11,7 @@ const Genres: React.FunctionComponent<Props> = ({ genreIDs }) => {
 
     return (
         <div className="genres">
-            {genreIDs.map((g) => (
+            {genreIDs?.map((g) => (
                 <div className="genre" key={g}>
                     {genre[g] || "no-genre"}
                 </div>

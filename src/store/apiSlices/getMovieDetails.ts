@@ -1,14 +1,16 @@
 import { movixApiSlice } from "@/service/api";
-import { MovieDetails } from "@/service/models";
+import { MovieDetails, TVDetails } from "@/service/models";
 
 interface QueryProps {
     mediaType: string | undefined;
     mediaID: number;
 }
 
+type Reponse = MovieDetails & TVDetails;
+
 const extendedMovieDetailsSlice = movixApiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getMovieDetails: builder.query<MovieDetails, QueryProps>({
+        getMovieDetails: builder.query<Reponse, QueryProps>({
             query: ({ mediaType, mediaID }) => `/${mediaType}/${mediaID}`,
         }),
     }),
