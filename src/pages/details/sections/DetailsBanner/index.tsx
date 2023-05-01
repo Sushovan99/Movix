@@ -9,12 +9,22 @@ import CircleRating from "@/components/CircleRating";
 import { PlayIcon } from "@/components/Icon";
 import Img from "@/components/LazyLoadImage";
 import PosterFallback from "@/assets/no-poster.png";
+import { Crew, VideoResults } from "@/service/models";
+import VideoPopup from "@/components/VideoPopup";
 import "./style.scss";
 
-const DetailsBanner: React.FunctionComponent = () => {
+interface Props {
+    video: VideoResults | undefined;
+    crew: Crew[] | undefined;
+}
+
+const DetailsBanner: React.FunctionComponent<Props> = ({ video, crew }) => {
     const { base_url, backdrop_sizes, poster_sizes } = useAppSelector(
         (state) => state.dimensions
     );
+    const [show, setShow] = useState(false);
+    const [videoID, setVideoID] = useState<string | null>(null);
+
     const { id, mediaType } = useParams();
 
     const { data, isSuccess } = useGetMovieDetailsQuery({
@@ -29,6 +39,11 @@ const DetailsBanner: React.FunctionComponent = () => {
         const minutes = totalMinutes % 60;
         return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
     };
+
+    const director = crew?.filter((f) => f.job === "Director");
+    const writer = crew?.filter(
+        (f) => f.job === "Screenplay" || f.job === "Story" || f.job === "Writer"
+    );
 
     return (
         <div className="detailsBanner">
@@ -81,7 +96,15 @@ const DetailsBanner: React.FunctionComponent = () => {
                                 <div className="row">
                                     <CircleRating rating={data.vote_average} />
 
-                                    <div className="playbtn">
+                                    <div
+                                        className="playbtn"
+                                        onClick={() => {
+                                            setShow(true);
+                                            setVideoID(
+                                                video?.key ? video.key : null
+                                            );
+                                        }}
+                                    >
                                         <PlayIcon />
                                         <span className="text">
                                             Watch trailer
@@ -131,8 +154,66 @@ const DetailsBanner: React.FunctionComponent = () => {
                                         </div>
                                     ) : null}
                                 </div>
+
+                                {!!director?.length && (
+                                    <div className="info">
+                                        <span className="text bold">
+                                            Director:{" "}
+                                        </span>
+                                        <span className="text">
+                                            {director.map((d, i) => (
+                                                <span key={i}>
+                                                    {d.name}
+                                                    {director.length - 1 !==
+                                                        i && ", "}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </div>
+                                )}
+
+                                {!!writer?.length && (
+                                    <div className="info">
+                                        <span className="text bold">
+                                            Writer:{" "}
+                                        </span>
+                                        <span className="text">
+                                            {writer.map((w, i) => (
+                                                <span key={i}>
+                                                    {w.name}
+                                                    {writer.length - 1 !== i &&
+                                                        ", "}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </div>
+                                )}
+
+                                {!!data?.created_by?.length && (
+                                    <div className="info">
+                                        <span className="text bold">
+                                            Creator:{" "}
+                                        </span>
+                                        <span className="text">
+                                            {data?.created_by.map((w, i) => (
+                                                <span key={i}>
+                                                    {w.name || "no-data"}
+                                                    {data?.created_by.length -
+                                                        1 !==
+                                                        i && ", "}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                         </div>
+                        <VideoPopup
+                            show={show}
+                            videoID={videoID}
+                            setShow={setShow}
+                            setVideoID={setVideoID}
+                        />
                     </ContentWrapper>
                 </React.Fragment>
             ) : (

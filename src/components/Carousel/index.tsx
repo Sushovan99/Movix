@@ -3,7 +3,7 @@ import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import dayjs from "dayjs";
 import Img from "../LazyLoadImage";
 import ContentWrapper from "../ContentWrapper";
@@ -82,16 +82,14 @@ const Carousel: React.FunctionComponent<Props> = ({
                             const url =
                                 base_url + poster_sizes[500] + item.poster_path;
                             return (
-                                <div
+                                <Link
+                                    to={`${item.media_type || tabValue}/${
+                                        item.id
+                                    }`}
+                                    target="_blank"
                                     className="carouselItem"
+                                    style={{ textDecoration: "none" }}
                                     key={item.id}
-                                    onClick={() =>
-                                        Navigate(
-                                            `${item.media_type || tabValue}/${
-                                                item.id
-                                            }`
-                                        )
-                                    }
                                 >
                                     <div className="posterBlock">
                                         <Img
@@ -113,7 +111,7 @@ const Carousel: React.FunctionComponent<Props> = ({
                                             )}
                                         </span>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>
