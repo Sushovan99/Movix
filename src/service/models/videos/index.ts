@@ -1,4 +1,4 @@
-interface Results {
+export interface VideoResults {
     id: string;
     iso_639_1: string;
     iso_3166_1: string;
@@ -13,5 +13,5 @@ interface Results {
 
 export interface Video {
     id: number;
-    results: Results[];
+    results: VideoResults[];
 }

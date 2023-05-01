@@ -1,4 +1,4 @@
-interface Cast {
+export interface Cast {
     id: number;
     adult: boolean;
     gender: number | null;
@@ -13,7 +13,7 @@ interface Cast {
     order: number;
 }
 
-interface Crew {
+export interface Crew {
     id: number;
     adult: boolean;
     gender: number | null;

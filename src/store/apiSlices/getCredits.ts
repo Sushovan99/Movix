@@ -2,8 +2,8 @@ import { movixApiSlice } from "@/service/api";
 import { Credits } from "@/service/models";
 
 interface QueryProps {
-    mediaType: string;
-    mediaID: string | number;
+    mediaType: string | undefined;
+    mediaID: string | undefined;
 }
 
 const extendedGetCreditsSlice = movixApiSlice.injectEndpoints({
