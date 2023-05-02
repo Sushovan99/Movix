@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import DetailsBanner from "./sections/DetailsBanner";
 import Cast from "./sections/Cast";
 import VideoSection from "./sections/Videos";
+import Similar from "./sections/Similar";
+import Recommend from "./sections/Recommend";
 import { useGetCreditsQuery } from "@/store/apiSlices/getCredits";
 import { useGetVideosQuery } from "@/store/apiSlices/getVideos";
 import "./style.scss";
@@ -19,8 +21,6 @@ const DetailsPage: React.FunctionComponent = () => {
         mediaID: id,
     });
 
-    console.log(videoData);
-
     return (
         <React.Fragment>
             <DetailsBanner
@@ -29,6 +29,8 @@ const DetailsPage: React.FunctionComponent = () => {
             />
             <Cast data={creditsData?.cast} isSuccess={isSuccess} />
             <VideoSection isSuccess={isLoadingSuccess} data={videoData} />
+            <Similar mediaType={mediaType} mediaID={id} />
+            <Recommend mediaType={mediaType} mediaID={id} />
         </React.Fragment>
     );
 };

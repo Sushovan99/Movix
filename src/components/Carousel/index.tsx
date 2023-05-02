@@ -3,7 +3,7 @@ import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import Img from "../LazyLoadImage";
 import ContentWrapper from "../ContentWrapper";
@@ -19,6 +19,7 @@ interface Props {
     isSuccess: boolean;
     tabValue?: string;
     carouselRef: React.RefObject<HTMLDivElement>;
+    title?: string;
 }
 
 const Skeleton: React.FunctionComponent = () => {
@@ -38,8 +39,8 @@ const Carousel: React.FunctionComponent<Props> = ({
     isSuccess,
     tabValue,
     carouselRef,
+    title,
 }) => {
-    const Navigate = useNavigate();
     const { base_url, poster_sizes } = useAppSelector(
         (state) => state.dimensions
     );
@@ -68,6 +69,7 @@ const Carousel: React.FunctionComponent<Props> = ({
     return (
         <div className="carousel">
             <ContentWrapper>
+                {title && <div className="carouselTitle">{title}</div>}
                 <BsFillArrowLeftCircleFill
                     className="carouselLeftNav arrow"
                     onClick={() => scrollHandler("left")}
