@@ -16,12 +16,17 @@ const Similar: React.FunctionComponent<Props> = ({ mediaID, mediaType }) => {
 
     const title = mediaType === "tv" ? "Similar TV Shows" : "Similar Movies";
 
+    if (data?.results.length === 0) {
+        return null;
+    }
+
     return (
         <Carousel
             results={data?.results}
             isSuccess={isSuccess}
             carouselRef={carouselRef}
             title={title}
+            mediaType={mediaType}
         />
     );
 };

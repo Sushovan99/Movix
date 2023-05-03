@@ -25,6 +25,10 @@ const VideoSection: React.FunctionComponent<Props> = ({ isSuccess, data }) => {
     const [show, setShow] = useState(false);
     const [videoID, setVideoID] = useState<string | null>(null);
 
+    if (!data?.results.length) {
+        return null;
+    }
+
     return (
         <div className="videosSection">
             <ContentWrapper>

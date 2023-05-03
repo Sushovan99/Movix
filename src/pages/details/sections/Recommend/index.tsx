@@ -15,12 +15,17 @@ const Recommend: React.FunctionComponent<Props> = ({ mediaType, mediaID }) => {
         mediaID,
     });
 
+    if (data?.results.length === 0) {
+        return null;
+    }
+
     return (
         <Carousel
             title="Recommendations"
             results={data?.results}
             isSuccess={isSuccess}
             carouselRef={carouselRef}
+            mediaType={mediaType}
         />
     );
 };

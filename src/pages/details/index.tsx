@@ -22,7 +22,7 @@ const DetailsPage: React.FunctionComponent = () => {
     });
 
     return (
-        <React.Fragment>
+        <div>
             <DetailsBanner
                 video={videoData?.results[0]}
                 crew={creditsData?.crew}
@@ -31,7 +31,7 @@ const DetailsPage: React.FunctionComponent = () => {
             <VideoSection isSuccess={isLoadingSuccess} data={videoData} />
             <Similar mediaType={mediaType} mediaID={id} />
             <Recommend mediaType={mediaType} mediaID={id} />
-        </React.Fragment>
+        </div>
     );
 };
 

@@ -3,7 +3,7 @@ import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import Img from "../LazyLoadImage";
 import ContentWrapper from "../ContentWrapper";
@@ -17,9 +17,9 @@ import "./style.scss";
 interface Props {
     results: Result[] | undefined;
     isSuccess: boolean;
-    tabValue?: string;
     carouselRef: React.RefObject<HTMLDivElement>;
     title?: string;
+    mediaType?: string | undefined;
 }
 
 const Skeleton: React.FunctionComponent = () => {
@@ -37,13 +37,15 @@ const Skeleton: React.FunctionComponent = () => {
 const Carousel: React.FunctionComponent<Props> = ({
     results,
     isSuccess,
-    tabValue,
     carouselRef,
     title,
+    mediaType,
 }) => {
     const { base_url, poster_sizes } = useAppSelector(
         (state) => state.dimensions
     );
+
+    const navigate = useNavigate();
 
     const scrollHandler = (direction: "left" | "right"): void => {
         if (carouselRef) {
@@ -84,18 +86,24 @@ const Carousel: React.FunctionComponent<Props> = ({
                             const url =
                                 base_url + poster_sizes[500] + item.poster_path;
                             return (
-                                <Link
-                                    to={`${item.media_type || tabValue}/${
-                                        item.id
-                                    }`}
-                                    target="_blank"
+                                <div
+                                    onClick={() =>
+                                        navigate(
+                                            `/${item.media_type || mediaType}/${
+                                                item.id
+                                            }`
+                                        )
+                                    }
                                     className="carouselItem"
-                                    style={{ textDecoration: "none" }}
                                     key={item.id}
                                 >
                                     <div className="posterBlock">
                                         <Img
-                                            src={url ? url : PosterFallback}
+                                            src={
+                                                item.poster_path
+                                                    ? url
+                                                    : PosterFallback
+                                            }
                                             alt={item.title}
                                         />
                                         <CircleRating
@@ -113,7 +121,7 @@ const Carousel: React.FunctionComponent<Props> = ({
                                             )}
                                         </span>
                                     </div>
-                                </Link>
+                                </div>
                             );
                         })}
                     </div>

@@ -32,8 +32,8 @@ const Trending: React.FunctionComponent = () => {
 
             <Carousel
                 results={popularMovies?.results}
+                mediaType={tabValue}
                 isSuccess={isSuccess}
-                tabValue={tabValue}
                 carouselRef={carouselContainerRef}
             />
         </div>
