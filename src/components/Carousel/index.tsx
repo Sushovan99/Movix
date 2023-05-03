@@ -3,7 +3,7 @@ import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import Img from "../LazyLoadImage";
 import ContentWrapper from "../ContentWrapper";
@@ -45,8 +45,6 @@ const Carousel: React.FunctionComponent<Props> = ({
         (state) => state.dimensions
     );
 
-    const navigate = useNavigate();
-
     const scrollHandler = (direction: "left" | "right"): void => {
         if (carouselRef) {
             const container = carouselRef.current;
@@ -86,14 +84,11 @@ const Carousel: React.FunctionComponent<Props> = ({
                             const url =
                                 base_url + poster_sizes[500] + item.poster_path;
                             return (
-                                <div
-                                    onClick={() =>
-                                        navigate(
-                                            `/${item.media_type || mediaType}/${
-                                                item.id
-                                            }`
-                                        )
-                                    }
+                                <Link
+                                    to={`/${item.media_type || mediaType}/${
+                                        item.id
+                                    }`}
+                                    rel="noreferrer noopener"
                                     className="carouselItem"
                                     key={item.id}
                                 >
@@ -121,7 +116,7 @@ const Carousel: React.FunctionComponent<Props> = ({
                                             )}
                                         </span>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>
