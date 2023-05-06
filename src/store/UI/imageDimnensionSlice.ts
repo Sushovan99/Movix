@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface Dimensions {
     base_url: string;
@@ -82,22 +82,10 @@ const initialState: Dimensions = {
     completeURL: "",
 };
 
-interface PayloadType {
-    dimension: string;
-    file_path: string;
-}
-
 const imgDimensionsSlice = createSlice({
     name: "imageDimensions",
     initialState,
-    reducers: {
-        getImageURL(state, action: PayloadAction<PayloadType>) {
-            const { dimension, file_path } = action.payload;
-            state.completeURL = state.base_url + dimension + file_path;
-        },
-    },
+    reducers: {},
 });
-
-export const { getImageURL } = imgDimensionsSlice.actions;
 
 export default imgDimensionsSlice.reducer;

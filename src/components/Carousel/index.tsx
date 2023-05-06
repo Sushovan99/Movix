@@ -90,6 +90,7 @@ const Carousel: React.FunctionComponent<Props> = ({
                                     }`}
                                     rel="noreferrer noopener"
                                     className="carouselItem"
+                                    style={{ textDecoration: "none" }}
                                     key={item.id}
                                 >
                                     <div className="posterBlock">

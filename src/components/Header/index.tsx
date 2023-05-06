@@ -93,6 +93,7 @@ const Header: React.FunctionComponent = () => {
                     >
                         TV shows
                     </li>
+
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>

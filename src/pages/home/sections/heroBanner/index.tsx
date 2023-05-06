@@ -31,6 +31,15 @@ const HeroBanner: React.FunctionComponent = () => {
         }
     };
 
+    const searchBtnHandler = (): void => {
+        if (query.length > 0) {
+            Navigate({
+                pathname: "/search",
+                search: `?q=${query}`,
+            });
+        }
+    };
+
     return (
         <section className="heroBanner">
             <div className="backdrop-img">
@@ -61,7 +70,7 @@ const HeroBanner: React.FunctionComponent = () => {
                             onKeyUp={searchQueryHandler}
                             placeholder="Search for a movie or a TV show..."
                         />
-                        <button>Search</button>
+                        <button onMouseUp={searchBtnHandler}>Search</button>
                     </div>
                 </div>
             </ContentWrapper>

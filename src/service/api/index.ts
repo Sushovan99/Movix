@@ -18,6 +18,7 @@ export const movixApiSlice = createApi({
         "topRated",
         "similar",
         "recommended",
+        "search",
     ],
     endpoints: (builder) => ({}),
 });
