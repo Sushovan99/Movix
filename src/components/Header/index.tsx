@@ -7,6 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ContentWrapper from "@/components/ContentWrapper";
 import logo from "@/assets/movix-logo.svg";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
+import { resetCurrentPage } from "@/store/UI/searchedMoviesSlice";
+import { useAppDispatch } from "@/store/hooks";
 import "./style.scss";
 
 const Header: React.FunctionComponent = () => {
@@ -15,6 +17,7 @@ const Header: React.FunctionComponent = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [query, setQuery] = useState("");
     const [showSearch, setShowSearch] = useState(false);
+    const dispatch = useAppDispatch();
     const Navigate = useNavigate();
     const location = useLocation();
 
@@ -32,6 +35,7 @@ const Header: React.FunctionComponent = () => {
 
     const searchQueryHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && query.length > 0) {
+            dispatch(resetCurrentPage());
             Navigate({
                 pathname: "/search",
                 search: `?q=${query}`,

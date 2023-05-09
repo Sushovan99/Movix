@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { movixApiSlice } from "../service/api";
 import imageDimnensionSlice from "./UI/imageDimnensionSlice";
+import searchedMoviesSlice from "./UI/searchedMoviesSlice";
 import genresSlice from "./UI/genresSlice";
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
         [movixApiSlice.reducerPath]: movixApiSlice.reducer,
         dimensions: imageDimnensionSlice,
         genres: genresSlice,
+        searchedMovies: searchedMoviesSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(movixApiSlice.middleware),

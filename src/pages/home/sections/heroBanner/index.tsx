@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetUpcomingMoviesQuery } from "@/store/apiSlices/getUpcomingMovies";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { resetCurrentPage } from "@/store/UI/searchedMoviesSlice";
 import Img from "@/components/LazyLoadImage";
 import ContentWrapper from "@/components/ContentWrapper";
 import "./style.scss";
@@ -9,6 +10,7 @@ import "./style.scss";
 const HeroBanner: React.FunctionComponent = () => {
     const { data: movies } = useGetUpcomingMoviesQuery();
     const Navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [query, setQuery] = useState("");
     const { backdrop_sizes, base_url } = useAppSelector(
         (state) => state.dimensions
@@ -24,6 +26,7 @@ const HeroBanner: React.FunctionComponent = () => {
 
     const searchQueryHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && query.length > 0) {
+            dispatch(resetCurrentPage());
             Navigate({
                 pathname: "/search",
                 search: `?q=${query}`,
@@ -33,6 +36,7 @@ const HeroBanner: React.FunctionComponent = () => {
 
     const searchBtnHandler = (): void => {
         if (query.length > 0) {
+            dispatch(resetCurrentPage());
             Navigate({
                 pathname: "/search",
                 search: `?q=${query}`,

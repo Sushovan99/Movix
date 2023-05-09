@@ -1,6 +1,8 @@
 import { movixApiSlice } from "@/service/api";
 import { Result } from "@/service/models";
 
+const BASE_URL: string = import.meta.env["VITE_APP_TMDB_BASE_URL"];
+const TOKEN: string = import.meta.env["VITE_APP_TMDB_TOKEN"];
 interface SearchResults {
     page: number;
     total_results: number;
@@ -28,7 +30,10 @@ const extendGetSearchResultsSlice = movixApiSlice.injectEndpoints({
                 };
             },
             forceRefetch({ currentArg, previousArg }) {
-                return currentArg?.query !== previousArg?.query;
+                return (
+                    currentArg?.query !== previousArg?.query ||
+                    currentArg?.pageNum !== previousArg?.pageNum
+                );
             },
             providesTags: (result) => {
                 return result?.results
@@ -48,3 +53,13 @@ const extendGetSearchResultsSlice = movixApiSlice.injectEndpoints({
 });
 
 export const { useGetSearchResultsQuery } = extendGetSearchResultsSlice;
+
+export const useGetSearchResults = (
+    page: number,
+    query: string | null
+): Promise<Response> =>
+    fetch(BASE_URL + `/search/multi?query=${query}&page=${page}`, {
+        headers: {
+            Authorization: "bearer " + TOKEN,
+        },
+    });
