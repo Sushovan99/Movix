@@ -11,7 +11,7 @@ interface AllGenres {
 
 const extendGetMovieGenre = movixApiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getGenres: builder.query<AllGenres, string>({
+        getGenres: builder.query<AllGenres, string | undefined>({
             query: (mediaType: string) => `/genre/${mediaType}/list`,
         }),
     }),

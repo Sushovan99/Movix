@@ -13,7 +13,7 @@ import "./style.scss";
 interface Props {
     data: Result;
     mediaType: string | undefined;
-    fromSearch: boolean;
+    fromSearch?: boolean;
 }
 
 const MovieCard: React.FunctionComponent<Props> = ({
