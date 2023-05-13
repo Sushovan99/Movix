@@ -23,7 +23,12 @@ interface QueryResults {
     total_pages: number;
     results: Result[];
 }
+interface Genre {
+    id: number;
+    name: string;
+}
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let filters: any = {};
 
 const sortbyData = [
@@ -79,8 +84,10 @@ const ExplorePage: React.FunctionComponent = () => {
         FetchInitialData();
     }, [mediaType]);
 
-    const onChange = (selectedItems, action) => {
+    const onChange = (selectedItems: any, action: any) => {
+        console.log("action", action);
         if (action.name === "sortby") {
+            console.log("selected-items", selectedItems);
             setSortby(selectedItems);
             if (action.action !== "clear") {
                 filters.sort_by = selectedItems.value;
@@ -92,7 +99,9 @@ const ExplorePage: React.FunctionComponent = () => {
         if (action.name === "genres") {
             setGenre(selectedItems);
             if (action.action !== "clear") {
-                let genreId = selectedItems.map((g) => g.id);
+                let genreId: Genre[] | string = selectedItems.map(
+                    (g: Genre) => g.id
+                );
                 genreId = JSON.stringify(genreId).slice(1, -1);
                 filters.with_genres = genreId;
             } else {
@@ -120,8 +129,8 @@ const ExplorePage: React.FunctionComponent = () => {
                             value={genre}
                             closeMenuOnSelect={false}
                             options={genresData?.genres}
-                            getOptionLabel={(option) => option.name}
-                            getOptionValue={(option) => option.id}
+                            getOptionLabel={(option) => `${option?.name}`}
+                            getOptionValue={(option) => `${option?.id}`}
                             onChange={onChange}
                             placeholder="Select genres"
                             className="react-select-container genresDD"

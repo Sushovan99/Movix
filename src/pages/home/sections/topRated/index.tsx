@@ -33,7 +33,6 @@ const TopRated: React.FunctionComponent = () => {
             <Carousel
                 results={topRatedMovies?.results}
                 isSuccess={isSuccess}
-                tabValue={tabValue}
                 mediaType={tabValue}
                 carouselRef={carouselContainerRef}
             />

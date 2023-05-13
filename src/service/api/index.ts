@@ -20,5 +20,6 @@ export const movixApiSlice = createApi({
         "recommended",
         "search",
     ],
-    endpoints: (builder) => ({}),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    endpoints: (_builder) => ({}),
 });
