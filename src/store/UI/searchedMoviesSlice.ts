@@ -16,7 +16,7 @@ interface InitialState {
 
 const initialState: InitialState = {
     currentPage: 1,
-    loading: false,
+    loading: true,
     searchResults: {
         page: 0,
         total_pages: 0,
@@ -50,10 +50,17 @@ const searchedMovieSlice = createSlice({
                 ],
             };
         },
+        updateLoadingState(state, action: PayloadAction<boolean>) {
+            state.loading = action.payload;
+        },
     },
 });
 
-export const { resetCurrentPage, updateCurrentPage, updateSearchedMovies } =
-    searchedMovieSlice.actions;
+export const {
+    resetCurrentPage,
+    updateCurrentPage,
+    updateSearchedMovies,
+    updateLoadingState,
+} = searchedMovieSlice.actions;
 
 export default searchedMovieSlice.reducer;

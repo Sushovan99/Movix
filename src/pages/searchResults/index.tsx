@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
     updateCurrentPage,
     updateSearchedMovies,
+    updateLoadingState,
 } from "@/store/UI/searchedMoviesSlice";
 import { Result } from "@/service/models";
 import "./style.scss";
@@ -28,6 +29,19 @@ const SearchResultsPage: React.FunctionComponent = () => {
         (state) => state.searchedMovies
     );
 
+    const FetchInitialData = () => {
+        dispatch(updateLoadingState(true));
+        useGetSearchResults(currentPage, searchedQuery)
+            .then((res) => {
+                return res.json();
+            })
+            .then((newData: SearchResults) => {
+                dispatch(updateSearchedMovies(newData));
+                dispatch(updateLoadingState(false));
+                dispatch(updateCurrentPage());
+            });
+    };
+
     const FetchNextData = () => {
         useGetSearchResults(currentPage, searchedQuery)
             .then((res) => {
@@ -39,22 +53,8 @@ const SearchResultsPage: React.FunctionComponent = () => {
             });
     };
 
-    // const FetchInitialData = () => {
-    //     dispatch(updateLoadingState({ loading: true }));
-
-    //     useGetSearchResults(currentPage, searchedQuery)
-    //         .then((res) => {
-    //             return res.json();
-    //         })
-    //         .then((data: SearchResults) => {
-    //             dispatch(updateSearchedMovies(data));
-    //             dispatch(updateLoadingState({ loading: false }));
-    //         });
-    // };
-
     useEffect(() => {
-        console.log("Inside useEffect");
-        FetchNextData();
+        FetchInitialData();
     }, [searchedQuery]);
 
     return (
